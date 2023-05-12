@@ -1,0 +1,53 @@
+﻿@model PizzaFormModel
+
+<h1>Create</h1>
+
+<div class="container">
+    <form asp-controller="Menu" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <strong>Nome:</strong>
+            <input asp-for="Pizza.Nome" class="d-block w-100" />
+            <span asp-validation-for="Pizza.Nome" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Desctizione:</strong>
+            <textarea asp-for="Pizza.Descrizione" class="d-block w-100"></textarea>
+            <span asp-validation-for="Pizza.Descrizione" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <strong>URL Immagine:</strong>
+            <input asp-for="Pizza.Image" class="d-block w-100" />
+        </div>
+        <div class="mb-3">
+            <strong>Price:</strong>
+            <input asp-for="Pizza.Price" class="d-block w-100" />
+            <span asp-validation-for="Pizza.Price" class="text-danger"></span>
+        </div>
+        <div>
+            <strong>Category:</strong>
+            <select asp-for="Pizza.CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Nome"))"></select>
+        </div>
+        <div class="mb-3">
+            <strong>Ingredients:</strong>
+            @*<select asp-for="SelectedIngredients"
+                    multiple="multiple"
+                    size="10"
+                    class="form-control mb-2 mr-sm-2 ml-sm-3 leftList"
+                    asp-items="@Model.Ingredients">
+            </select>*@
+
+           @foreach (var ingredient in Model.Ingredients)
+            {
+                <div>
+                    <input id="@ingredient.Value" type="checkbox" name="SelectedIngredients" value="@ingredient.Value" />
+                    <label for="@ingredient.Value">@ingredient.Text</label>
+                </div>
+            }
+
+        </div>
+        <div class="text-end">
+            <input type="submit" class="btn btn-small btn-info" value="Salva">
+        </div>
+    </form>
+</div>

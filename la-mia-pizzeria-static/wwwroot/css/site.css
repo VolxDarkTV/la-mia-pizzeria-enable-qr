@@ -1,0 +1,31 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    font-family: monospace;
+    background: #eee;
+}
+
+.hide {
+    display: none;
+    position: absolute;
+    top: -60px;
+    left: 20px;
+    width: 200px;
+    z-index: 1;
+}
+.ingredients:hover + .hide{
+    display: block;
+}
